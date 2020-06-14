@@ -1,3 +1,5 @@
+# Code to search for some good combinations of rules to produce interesting results with randomly sampled sequence based application
+
 import numpy as np
 import matplotlib.pyplot as plt
 import random
@@ -30,12 +32,12 @@ for rule in range(1,256):  #storing all rules
     d=d[1:]
     rules.append([int(n) for n in d])
 
-n = 2  #number of rules to add in the ruleset
+n = 3  #number of rules to add in the ruleset
 
 for iterations in range(100): #Generating plots for 100 randomly generated triplets of rules
     
     ruleset = [] #set of rules to use
-    for iterations in range(n): #Selecting combinations of different triplets to use
+    for iterations in range(n): #Randomly Sampled Sequence-Based Rule Application
         rnum = random.randint(0,len(rules)-1)
         ruleset.append(rules[rnum])
 
@@ -51,8 +53,7 @@ for iterations in range(100): #Generating plots for 100 randomly generated tripl
             nbd = icloc[j:j+3] ##neighborhood of the current cell (j+1)
             nbdstr = "".join([str(elems) for elems in nbd])
             nbd_val = int(nbdstr,2) #value of the current cell's neighborhood
-            
-            icloc[j+1] = ruleset[k%n][nbd_val] ## Uniform Rule Application to determine cell state for (j+1)
+            icloc[j+1] = ruleset[random.randint(0,len(ruleset)-1)][nbd_val] #using rule to determine cell state for (j+1)
     
     plotting.append(icloc[1:259]) #tracking changes to IC
     
